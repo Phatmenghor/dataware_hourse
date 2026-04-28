@@ -1,4 +1,7 @@
 package cpb.dwh_bi_api.controllers;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import cpb.dwh_bi_api.dto.ApiResponse;
 import cpb.dwh_bi_api.dto.response.ReportResponse;
@@ -19,6 +22,7 @@ public class ReportController {
 
 	private final ReportService reportService;
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<ReportResponse>>> getAll() {
 		log.info("GET all reports");
@@ -26,6 +30,7 @@ public class ReportController {
 		return ResponseEntity.ok(ApiResponse.success("Reports retrieved successfully", reports));
 	}
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<ReportResponse>> getById(@PathVariable UUID id) {
 		log.info("GET report by id: {}", id);
@@ -33,6 +38,7 @@ public class ReportController {
 		return ResponseEntity.ok(ApiResponse.success(report));
 	}
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/department/{departmentId}")
 	public ResponseEntity<ApiResponse<List<ReportResponse>>> getByDepartmentId(@PathVariable UUID departmentId) {
 		log.info("GET reports by department id: {}", departmentId);
@@ -40,6 +46,7 @@ public class ReportController {
 		return ResponseEntity.ok(ApiResponse.success("Reports retrieved successfully", reports));
 	}
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/unit/{unitId}")
 	public ResponseEntity<ApiResponse<List<ReportResponse>>> getByUnitId(@PathVariable UUID unitId) {
 		log.info("GET reports by unit id: {}", unitId);
@@ -47,6 +54,7 @@ public class ReportController {
 		return ResponseEntity.ok(ApiResponse.success("Reports retrieved successfully", reports));
 	}
 
+t@Operation(summary = "Delete operation", description = "Delete resource")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse<Void>> delete(@PathVariable UUID id) {
 		log.info("DELETE report: {}", id);

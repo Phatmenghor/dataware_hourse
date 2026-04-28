@@ -1,4 +1,7 @@
 package cpb.dwh_bi_api.controllers;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import cpb.dwh_bi_api.dto.ApiResponse;
 import cpb.dwh_bi_api.dto.request.CreateUserRequest;
@@ -24,6 +27,7 @@ public class UserController {
 
 	private final UserService userService;
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<UserResponse>>> getAll() {
 		log.info("GET all users");
@@ -31,6 +35,7 @@ public class UserController {
 		return ResponseEntity.ok(ApiResponse.success("Users retrieved successfully", users));
 	}
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<UserResponse>> getById(@PathVariable UUID id) {
 		log.info("GET user by id: {}", id);
@@ -38,6 +43,7 @@ public class UserController {
 		return ResponseEntity.ok(ApiResponse.success(user));
 	}
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/username/{username}")
 	public ResponseEntity<ApiResponse<UserResponse>> getByUsername(@PathVariable String username) {
 		log.info("GET user by username: {}", username);
@@ -45,6 +51,7 @@ public class UserController {
 		return ResponseEntity.ok(ApiResponse.success(user));
 	}
 
+t@Operation(summary = "Create operation", description = "Create new resource")
 	@PostMapping
 	public ResponseEntity<ApiResponse<UserResponse>> create(@Valid @RequestBody CreateUserRequest request) {
 		log.info("POST create user: {}", request.getUsername());
@@ -53,6 +60,7 @@ public class UserController {
 			.body(ApiResponse.success("User created successfully", created));
 	}
 
+t@Operation(summary = "Update operation", description = "Update existing resource")
 	@PutMapping("/{id}")
 	public ResponseEntity<ApiResponse<UserResponse>> update(@PathVariable UUID id,
 			@Valid @RequestBody UpdateUserRequest request) {
@@ -61,6 +69,7 @@ public class UserController {
 		return ResponseEntity.ok(ApiResponse.success("User updated successfully", updated));
 	}
 
+t@Operation(summary = "Delete operation", description = "Delete resource")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse<Void>> delete(@PathVariable UUID id) {
 		log.info("DELETE user: {}", id);
@@ -68,6 +77,7 @@ public class UserController {
 		return ResponseEntity.ok(ApiResponse.success("User deleted successfully", null));
 	}
 
+t@Operation(summary = "Create operation", description = "Create new resource")
 	@PostMapping("/{id}/reset-password")
 	public ResponseEntity<ApiResponse<UserResponse>> resetPassword(@PathVariable UUID id,
 			@RequestParam String newPassword) {
@@ -76,6 +86,7 @@ public class UserController {
 		return ResponseEntity.ok(ApiResponse.success("Password reset successfully", user));
 	}
 
+t@Operation(summary = "Create operation", description = "Create new resource")
 	@PostMapping("/profile")
 	public ResponseEntity<ApiResponse<UserResponse>> getProfile(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
 		log.info("POST get user profile");

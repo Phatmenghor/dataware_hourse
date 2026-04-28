@@ -1,4 +1,7 @@
 package cpb.dwh_bi_api.controllers;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import cpb.dwh_bi_api.database.OracleConnectionJDBC;
 import cpb.dwh_bi_api.dto.ReportRequest;
@@ -45,6 +48,7 @@ public class ReportingController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
+t@Operation(summary = "Create operation", description = "Create new resource")
     @PostMapping("/to-excel")
     public ResponseEntity<byte[]> generateReport(@RequestBody ReportRequest request) {
         try {

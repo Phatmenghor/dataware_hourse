@@ -1,4 +1,7 @@
 package cpb.dwh_bi_api.controllers;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import cpb.dwh_bi_api.dto.ApiResponse;
 import cpb.dwh_bi_api.dto.request.CreateUnitRequest;
@@ -22,6 +25,7 @@ public class UnitController {
 
 	private final UnitService unitService;
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<UnitResponse>>> getAll() {
 		log.info("GET all units");
@@ -29,6 +33,7 @@ public class UnitController {
 		return ResponseEntity.ok(ApiResponse.success("Units retrieved successfully", units));
 	}
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<UnitResponse>> getById(@PathVariable UUID id) {
 		log.info("GET unit by id: {}", id);
@@ -36,6 +41,7 @@ public class UnitController {
 		return ResponseEntity.ok(ApiResponse.success(unit));
 	}
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/department/{departmentId}")
 	public ResponseEntity<ApiResponse<List<UnitResponse>>> getByDepartmentId(@PathVariable UUID departmentId) {
 		log.info("GET units by department id: {}", departmentId);
@@ -43,6 +49,7 @@ public class UnitController {
 		return ResponseEntity.ok(ApiResponse.success("Units retrieved successfully", units));
 	}
 
+t@Operation(summary = "Create operation", description = "Create new resource")
 	@PostMapping
 	public ResponseEntity<ApiResponse<UnitResponse>> create(@Valid @RequestBody CreateUnitRequest request) {
 		log.info("POST create unit: {}", request.getName());
@@ -51,6 +58,7 @@ public class UnitController {
 			.body(ApiResponse.success("Unit created successfully", created));
 	}
 
+t@Operation(summary = "Update operation", description = "Update existing resource")
 	@PutMapping("/{id}")
 	public ResponseEntity<ApiResponse<UnitResponse>> update(@PathVariable UUID id,
 			@Valid @RequestBody CreateUnitRequest request) {
@@ -59,6 +67,7 @@ public class UnitController {
 		return ResponseEntity.ok(ApiResponse.success("Unit updated successfully", updated));
 	}
 
+t@Operation(summary = "Delete operation", description = "Delete resource")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse<Void>> delete(@PathVariable UUID id) {
 		log.info("DELETE unit: {}", id);

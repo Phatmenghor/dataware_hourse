@@ -1,4 +1,7 @@
 package cpb.dwh_bi_api.controllers;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import cpb.dwh_bi_api.dto.ApiResponse;
 import cpb.dwh_bi_api.dto.request.CreatePositionRequest;
@@ -23,6 +26,7 @@ public class PositionController {
 
 	private final PositionService positionService;
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<PositionResponse>>> getAll() {
 		log.info("GET all positions");
@@ -30,6 +34,7 @@ public class PositionController {
 		return ResponseEntity.ok(ApiResponse.success("Positions retrieved successfully", positions));
 	}
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<PositionResponse>> getById(@PathVariable UUID id) {
 		log.info("GET position by id: {}", id);
@@ -37,6 +42,7 @@ public class PositionController {
 		return ResponseEntity.ok(ApiResponse.success(position));
 	}
 
+t@Operation(summary = "Create operation", description = "Create new resource")
 	@PostMapping
 	public ResponseEntity<ApiResponse<PositionResponse>> create(@Valid @RequestBody CreatePositionRequest request) {
 		log.info("POST create position: {}", request.getName());
@@ -45,6 +51,7 @@ public class PositionController {
 			.body(ApiResponse.success("Position created successfully", created));
 	}
 
+t@Operation(summary = "Update operation", description = "Update existing resource")
 	@PutMapping("/{id}")
 	public ResponseEntity<ApiResponse<PositionResponse>> update(@PathVariable UUID id,
 			@Valid @RequestBody UpdatePositionRequest request) {
@@ -53,6 +60,7 @@ public class PositionController {
 		return ResponseEntity.ok(ApiResponse.success("Position updated successfully", updated));
 	}
 
+t@Operation(summary = "Delete operation", description = "Delete resource")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse<Void>> delete(@PathVariable UUID id) {
 		log.info("DELETE position: {}", id);

@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${DB_URL:jdbc:postgresql://192.168.101.5:5432/dwh_cpb_bi}
+    url: ${DB_URL:jdbc:postgresql://prod-db:5432/dwh_cpb_bi}
     username: ${DB_USER:postgres}
-    password: ${DB_PASSWORD:123cp!@#}
+    password: ${DB_PASSWORD:secure_password}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -12,3 +12,7 @@ logging:
   level:
     root: WARN
     cpb.dwh_bi_api: INFO
+
+springdoc:
+  swagger-ui:
+    enabled: false

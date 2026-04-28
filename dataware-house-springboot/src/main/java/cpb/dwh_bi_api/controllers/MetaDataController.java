@@ -1,4 +1,7 @@
 package cpb.dwh_bi_api.controllers;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import cpb.dwh_bi_api.dto.ApiResponse;
 import cpb.dwh_bi_api.dto.response.MetaDataResponse;
@@ -19,6 +22,7 @@ public class MetaDataController {
 
 	private final MetaDataService metaDataService;
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<MetaDataResponse>>> getAll() {
 		log.info("GET all metadata");
@@ -26,6 +30,7 @@ public class MetaDataController {
 		return ResponseEntity.ok(ApiResponse.success("Metadata retrieved successfully", metaData));
 	}
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<MetaDataResponse>> getById(@PathVariable UUID id) {
 		log.info("GET metadata by id: {}", id);
@@ -33,6 +38,7 @@ public class MetaDataController {
 		return ResponseEntity.ok(ApiResponse.success(metaData));
 	}
 
+t@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/type/{type}")
 	public ResponseEntity<ApiResponse<List<MetaDataResponse>>> getByType(@PathVariable String type) {
 		log.info("GET metadata by type: {}", type);
@@ -40,6 +46,7 @@ public class MetaDataController {
 		return ResponseEntity.ok(ApiResponse.success("Metadata retrieved successfully", metaData));
 	}
 
+t@Operation(summary = "Delete operation", description = "Delete resource")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse<Void>> delete(@PathVariable UUID id) {
 		log.info("DELETE metadata: {}", id);
