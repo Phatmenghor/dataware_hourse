@@ -1,0 +1,6 @@
+apps:
+  - script: "npm start -- -p 8081"
+    name: "BI_DWH"
+    instances: 1
+    exec_mode: fork
+    watch: false
