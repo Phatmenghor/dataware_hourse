@@ -1,4 +1,5 @@
 package cpb.dwh_bi_api.services.impl;
+import cpb.dwh_bi_api.exceptions.ResourceNotFoundException;
 
 import cpb.dwh_bi_api.dto.request.CreateRoleRequest;
 import cpb.dwh_bi_api.dto.request.UpdateRoleRequest;
@@ -65,7 +66,7 @@ public class RoleServiceImpl implements RoleService {
 	public void delete(UUID id) {
 		log.info("Deleting role with id: {}", id);
 		if (!roleRepository.existsById(id)) {
-			throw new RuntimeException("Role not found with id: " + id);
+			throw new cpb.dwh_bi_api.exceptions.ResourceNotFoundException("Role not found with id: " + id);
 		}
 		roleRepository.deleteById(id);
 	}

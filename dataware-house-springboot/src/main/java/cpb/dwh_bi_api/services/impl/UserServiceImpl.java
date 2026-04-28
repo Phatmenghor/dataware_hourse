@@ -1,4 +1,5 @@
 package cpb.dwh_bi_api.services.impl;
+import cpb.dwh_bi_api.exceptions.ResourceNotFoundException;
 
 import cpb.dwh_bi_api.dto.request.CreateUserRequest;
 import cpb.dwh_bi_api.dto.request.UpdateUserRequest;
@@ -79,7 +80,7 @@ public class UserServiceImpl implements UserService {
 	public void delete(UUID id) {
 		log.info("Deleting user with id: {}", id);
 		if (!userRepository.existsById(id)) {
-			throw new RuntimeException("User not found with id: " + id);
+			throw new cpb.dwh_bi_api.exceptions.ResourceNotFoundException("User not found with id: " + id);
 		}
 		userRepository.deleteById(id);
 	}

@@ -1,4 +1,5 @@
 package cpb.dwh_bi_api.services.impl;
+import cpb.dwh_bi_api.exceptions.ResourceNotFoundException;
 
 import cpb.dwh_bi_api.dto.request.CreatePositionRequest;
 import cpb.dwh_bi_api.dto.request.UpdatePositionRequest;
@@ -65,7 +66,7 @@ public class PositionServiceImpl implements PositionService {
 	public void delete(UUID id) {
 		log.info("Deleting position with id: {}", id);
 		if (!positionRepository.existsById(id)) {
-			throw new RuntimeException("Position not found with id: " + id);
+			throw new cpb.dwh_bi_api.exceptions.ResourceNotFoundException("Position not found with id: " + id);
 		}
 		positionRepository.deleteById(id);
 	}

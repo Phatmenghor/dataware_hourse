@@ -28,6 +28,20 @@ public class GlobalExceptionHandler {
 			.body(ApiResponse.error(400, "Validation failed", errors));
 	}
 
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<ApiResponse<Object>> handleResourceNotFoundException(ResourceNotFoundException ex) {
+		log.error("Resource not found: {}", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND)
+			.body(ApiResponse.error(404, ex.getMessage()));
+	}
+
+	@ExceptionHandler(BadRequestException.class)
+	public ResponseEntity<ApiResponse<Object>> handleBadRequestException(BadRequestException ex) {
+		log.error("Bad request: {}", ex.getMessage());
+		return ResponseEntity.badRequest()
+			.body(ApiResponse.error(400, ex.getMessage()));
+	}
+
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<ApiResponse<Object>> handleRuntimeException(RuntimeException ex) {
 		log.error("Runtime error: {}", ex.getMessage(), ex);

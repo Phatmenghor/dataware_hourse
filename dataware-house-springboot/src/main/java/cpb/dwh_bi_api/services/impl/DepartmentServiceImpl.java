@@ -1,4 +1,5 @@
 package cpb.dwh_bi_api.services.impl;
+import cpb.dwh_bi_api.exceptions.ResourceNotFoundException;
 
 import cpb.dwh_bi_api.dto.request.CreateDepartmentRequest;
 import cpb.dwh_bi_api.dto.request.UpdateDepartmentRequest;
@@ -39,7 +40,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	public DepartmentResponse getById(UUID id) {
 		log.info("Fetching department by id: {}", id);
 		Department department = departmentRepository.findById(id)
-			.orElseThrow(() -> new RuntimeException("Department not found with id: " + id));
+			.orElseThrow(() -> new cpb.dwh_bi_api.exceptions.ResourceNotFoundException("Department not found with id: " + id));
 		return departmentMapper.toResponse(department);
 	}
 
@@ -65,7 +66,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	public void delete(UUID id) {
 		log.info("Deleting department with id: {}", id);
 		if (!departmentRepository.existsById(id)) {
-			throw new RuntimeException("Department not found with id: " + id);
+			throw new cpb.dwh_bi_api.exceptions.ResourceNotFoundException("Department not found with id: " + id);
 		}
 		departmentRepository.deleteById(id);
 	}
