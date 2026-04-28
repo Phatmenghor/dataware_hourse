@@ -1,61 +1,67 @@
-import { API_END_POINT, TOKEN_COOKIES } from "@/constant/api-end-point";
-import { getToken } from "@/lib/init-token";
-import axios from "axios";
+import apiClient from "@/lib/api-client";
 
-export async function getAllReportService(query: string) {
+export async function getAllReportsService() {
   try {
-    const resposne = await axios.post(
-      `${process.env.API_URL + API_END_POINT.REPORTS}`,
-      {},
-      {
-        params: {
-          query: query,
-        },
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getToken(TOKEN_COOKIES.TOKEN_NAME)}`,
-        },
-      }
-    );
-
+    const response = await apiClient.get("/reports");
     return {
       success: true,
-      data: resposne.data.data,
+      data: response.data || [],
     };
-  } catch {
+  } catch (error: any) {
+    console.error("Error fetching reports:", error.message);
     return {
       success: false,
       data: [],
+      error: error.message,
     };
   }
 }
 
-export async function getTotalReportService(query: string) {
+export async function getReportByDepartmentService(departmentId: string) {
   try {
-    const resposne = await axios.post(
-      `${process.env.API_URL}/reporting/total-pages`,
-      {},
-      {
-        params: {
-          query: query,
-        },
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getToken(TOKEN_COOKIES.TOKEN_NAME)}`,
-        },
-      }
-    );
-
+    const response = await apiClient.get(`/reports/department/${departmentId}`);
     return {
       success: true,
-      data: resposne.data.totalPages,
+      data: response.data || [],
     };
-  } catch {
+  } catch (error: any) {
+    console.error("Error fetching reports by department:", error.message);
     return {
       success: false,
-      data: 0,
+      data: [],
+      error: error.message,
+    };
+  }
+}
+
+export async function getReportByIdService(id: string) {
+  try {
+    const response = await apiClient.get(`/reports/${id}`);
+    return {
+      success: true,
+      data: response.data,
+    };
+  } catch (error: any) {
+    console.error("Error fetching report:", error.message);
+    return {
+      success: false,
+      data: null,
+      error: error.message,
+    };
+  }
+}
+
+export async function deleteReportService(id: string) {
+  try {
+    await apiClient.delete(`/reports/${id}`);
+    return {
+      success: true,
+    };
+  } catch (error: any) {
+    console.error("Error deleting report:", error.message);
+    return {
+      success: false,
+      error: error.message,
     };
   }
 }
