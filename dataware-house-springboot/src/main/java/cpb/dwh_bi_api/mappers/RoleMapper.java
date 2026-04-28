@@ -1,0 +1,19 @@
+package cpb.dwh_bi_api.mappers;
+
+import cpb.dwh_bi_api.dto.request.CreateRoleRequest;
+import cpb.dwh_bi_api.dto.request.UpdateRoleRequest;
+import cpb.dwh_bi_api.dto.response.RoleResponse;
+import cpb.dwh_bi_api.entities.Role;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+public interface RoleMapper {
+
+	RoleResponse toResponse(Role entity);
+
+	Role toEntity(CreateRoleRequest request);
+
+	void updateEntity(UpdateRoleRequest request, @MappingTarget Role entity);
+}

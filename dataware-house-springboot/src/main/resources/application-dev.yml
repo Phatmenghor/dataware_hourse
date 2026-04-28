@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://192.168.103.106:5432/dwh_cpb_bi}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:123cp!@#}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+logging:
+  level:
+    root: INFO
+    cpb.dwh_bi_api: INFO
+    org.springframework.web: WARN
