@@ -27,7 +27,7 @@ public class UserController {
 
 	private final UserService userService;
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<UserResponse>>> getAll() {
 		log.info("GET all users");
@@ -35,7 +35,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success("Users retrieved successfully", users));
 	}
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<UserResponse>> getById(@PathVariable UUID id) {
 		log.info("GET user by id: {}", id);
@@ -43,7 +43,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success(user));
 	}
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/username/{username}")
 	public ResponseEntity<ApiResponse<UserResponse>> getByUsername(@PathVariable String username) {
 		log.info("GET user by username: {}", username);
@@ -51,7 +51,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success(user));
 	}
 
-t@Operation(summary = "Create operation", description = "Create new resource")
+@Operation(summary = "Create operation", description = "Create new resource")
 	@PostMapping
 	public ResponseEntity<ApiResponse<UserResponse>> create(@Valid @RequestBody CreateUserRequest request) {
 		log.info("POST create user: {}", request.getUsername());
@@ -60,7 +60,7 @@ t@Operation(summary = "Create operation", description = "Create new resource")
 			.body(ApiResponse.success("User created successfully", created));
 	}
 
-t@Operation(summary = "Update operation", description = "Update existing resource")
+@Operation(summary = "Update operation", description = "Update existing resource")
 	@PutMapping("/{id}")
 	public ResponseEntity<ApiResponse<UserResponse>> update(@PathVariable UUID id,
 			@Valid @RequestBody UpdateUserRequest request) {
@@ -69,7 +69,7 @@ t@Operation(summary = "Update operation", description = "Update existing resourc
 		return ResponseEntity.ok(ApiResponse.success("User updated successfully", updated));
 	}
 
-t@Operation(summary = "Delete operation", description = "Delete resource")
+@Operation(summary = "Delete operation", description = "Delete resource")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse<Void>> delete(@PathVariable UUID id) {
 		log.info("DELETE user: {}", id);
@@ -77,7 +77,7 @@ t@Operation(summary = "Delete operation", description = "Delete resource")
 		return ResponseEntity.ok(ApiResponse.success("User deleted successfully", null));
 	}
 
-t@Operation(summary = "Create operation", description = "Create new resource")
+@Operation(summary = "Create operation", description = "Create new resource")
 	@PostMapping("/{id}/reset-password")
 	public ResponseEntity<ApiResponse<UserResponse>> resetPassword(@PathVariable UUID id,
 			@RequestParam String newPassword) {
@@ -86,7 +86,7 @@ t@Operation(summary = "Create operation", description = "Create new resource")
 		return ResponseEntity.ok(ApiResponse.success("Password reset successfully", user));
 	}
 
-t@Operation(summary = "Create operation", description = "Create new resource")
+@Operation(summary = "Create operation", description = "Create new resource")
 	@PostMapping("/profile")
 	public ResponseEntity<ApiResponse<UserResponse>> getProfile(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
 		log.info("POST get user profile");

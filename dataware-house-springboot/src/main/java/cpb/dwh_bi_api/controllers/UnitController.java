@@ -25,7 +25,7 @@ public class UnitController {
 
 	private final UnitService unitService;
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<UnitResponse>>> getAll() {
 		log.info("GET all units");
@@ -33,7 +33,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success("Units retrieved successfully", units));
 	}
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<UnitResponse>> getById(@PathVariable UUID id) {
 		log.info("GET unit by id: {}", id);
@@ -41,7 +41,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success(unit));
 	}
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/department/{departmentId}")
 	public ResponseEntity<ApiResponse<List<UnitResponse>>> getByDepartmentId(@PathVariable UUID departmentId) {
 		log.info("GET units by department id: {}", departmentId);
@@ -49,7 +49,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success("Units retrieved successfully", units));
 	}
 
-t@Operation(summary = "Create operation", description = "Create new resource")
+@Operation(summary = "Create operation", description = "Create new resource")
 	@PostMapping
 	public ResponseEntity<ApiResponse<UnitResponse>> create(@Valid @RequestBody CreateUnitRequest request) {
 		log.info("POST create unit: {}", request.getName());
@@ -58,7 +58,7 @@ t@Operation(summary = "Create operation", description = "Create new resource")
 			.body(ApiResponse.success("Unit created successfully", created));
 	}
 
-t@Operation(summary = "Update operation", description = "Update existing resource")
+@Operation(summary = "Update operation", description = "Update existing resource")
 	@PutMapping("/{id}")
 	public ResponseEntity<ApiResponse<UnitResponse>> update(@PathVariable UUID id,
 			@Valid @RequestBody CreateUnitRequest request) {
@@ -67,7 +67,7 @@ t@Operation(summary = "Update operation", description = "Update existing resourc
 		return ResponseEntity.ok(ApiResponse.success("Unit updated successfully", updated));
 	}
 
-t@Operation(summary = "Delete operation", description = "Delete resource")
+@Operation(summary = "Delete operation", description = "Delete resource")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse<Void>> delete(@PathVariable UUID id) {
 		log.info("DELETE unit: {}", id);

@@ -26,7 +26,7 @@ public class PositionController {
 
 	private final PositionService positionService;
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<PositionResponse>>> getAll() {
 		log.info("GET all positions");
@@ -34,7 +34,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success("Positions retrieved successfully", positions));
 	}
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<PositionResponse>> getById(@PathVariable UUID id) {
 		log.info("GET position by id: {}", id);
@@ -42,7 +42,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success(position));
 	}
 
-t@Operation(summary = "Create operation", description = "Create new resource")
+@Operation(summary = "Create operation", description = "Create new resource")
 	@PostMapping
 	public ResponseEntity<ApiResponse<PositionResponse>> create(@Valid @RequestBody CreatePositionRequest request) {
 		log.info("POST create position: {}", request.getName());
@@ -51,7 +51,7 @@ t@Operation(summary = "Create operation", description = "Create new resource")
 			.body(ApiResponse.success("Position created successfully", created));
 	}
 
-t@Operation(summary = "Update operation", description = "Update existing resource")
+@Operation(summary = "Update operation", description = "Update existing resource")
 	@PutMapping("/{id}")
 	public ResponseEntity<ApiResponse<PositionResponse>> update(@PathVariable UUID id,
 			@Valid @RequestBody UpdatePositionRequest request) {
@@ -60,7 +60,7 @@ t@Operation(summary = "Update operation", description = "Update existing resourc
 		return ResponseEntity.ok(ApiResponse.success("Position updated successfully", updated));
 	}
 
-t@Operation(summary = "Delete operation", description = "Delete resource")
+@Operation(summary = "Delete operation", description = "Delete resource")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse<Void>> delete(@PathVariable UUID id) {
 		log.info("DELETE position: {}", id);

@@ -22,7 +22,7 @@ public class ReportController {
 
 	private final ReportService reportService;
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<ReportResponse>>> getAll() {
 		log.info("GET all reports");
@@ -30,7 +30,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success("Reports retrieved successfully", reports));
 	}
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<ReportResponse>> getById(@PathVariable UUID id) {
 		log.info("GET report by id: {}", id);
@@ -38,7 +38,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success(report));
 	}
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/department/{departmentId}")
 	public ResponseEntity<ApiResponse<List<ReportResponse>>> getByDepartmentId(@PathVariable UUID departmentId) {
 		log.info("GET reports by department id: {}", departmentId);
@@ -46,7 +46,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success("Reports retrieved successfully", reports));
 	}
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/unit/{unitId}")
 	public ResponseEntity<ApiResponse<List<ReportResponse>>> getByUnitId(@PathVariable UUID unitId) {
 		log.info("GET reports by unit id: {}", unitId);
@@ -54,7 +54,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success("Reports retrieved successfully", reports));
 	}
 
-t@Operation(summary = "Delete operation", description = "Delete resource")
+@Operation(summary = "Delete operation", description = "Delete resource")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse<Void>> delete(@PathVariable UUID id) {
 		log.info("DELETE report: {}", id);

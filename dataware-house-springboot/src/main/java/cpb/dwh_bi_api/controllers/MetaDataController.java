@@ -22,7 +22,7 @@ public class MetaDataController {
 
 	private final MetaDataService metaDataService;
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<MetaDataResponse>>> getAll() {
 		log.info("GET all metadata");
@@ -30,7 +30,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success("Metadata retrieved successfully", metaData));
 	}
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<MetaDataResponse>> getById(@PathVariable UUID id) {
 		log.info("GET metadata by id: {}", id);
@@ -38,7 +38,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success(metaData));
 	}
 
-t@Operation(summary = "Get operation", description = "Retrieve data")
+@Operation(summary = "Get operation", description = "Retrieve data")
 	@GetMapping("/type/{type}")
 	public ResponseEntity<ApiResponse<List<MetaDataResponse>>> getByType(@PathVariable String type) {
 		log.info("GET metadata by type: {}", type);
@@ -46,7 +46,7 @@ t@Operation(summary = "Get operation", description = "Retrieve data")
 		return ResponseEntity.ok(ApiResponse.success("Metadata retrieved successfully", metaData));
 	}
 
-t@Operation(summary = "Delete operation", description = "Delete resource")
+@Operation(summary = "Delete operation", description = "Delete resource")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse<Void>> delete(@PathVariable UUID id) {
 		log.info("DELETE metadata: {}", id);
