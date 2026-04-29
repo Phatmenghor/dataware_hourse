@@ -1,0 +1,11 @@
+package cpb.dwh_bi_api.features.unit.repository;
+
+import cpb.dwh_bi_api.features.unit.models.Unit;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.UUID;
+
+@Repository
+public interface UnitRepository extends JpaRepository<Unit, UUID> {
+}

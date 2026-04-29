@@ -1,0 +1,74 @@
+package cpb.dwh_bi_api.features.unit.service.impl;
+
+import cpb.dwh_bi_api.features.unit.dto.request.CreateUnitRequest;
+import cpb.dwh_bi_api.features.unit.dto.request.UpdateUnitRequest;
+import cpb.dwh_bi_api.features.unit.dto.response.UnitResponse;
+import cpb.dwh_bi_api.features.unit.mapper.UnitMapper;
+import cpb.dwh_bi_api.features.unit.models.Unit;
+import cpb.dwh_bi_api.features.unit.repository.UnitRepository;
+import cpb.dwh_bi_api.features.unit.service.UnitService;
+import cpb.dwh_bi_api.shared.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+@Transactional
+public class UnitServiceImpl implements UnitService {
+
+	private final UnitRepository unitRepository;
+	private final UnitMapper unitMapper;
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<UnitResponse> getAll() {
+		log.info("Fetching all units");
+		return unitRepository.findAll()
+			.stream()
+			.map(unitMapper::toResponse)
+			.collect(Collectors.toList());
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public UnitResponse getById(UUID id) {
+		log.info("Fetching unit by id: {}", id);
+		Unit unit = unitRepository.findById(id)
+			.orElseThrow(() -> new ResourceNotFoundException("Unit not found with id: " + id));
+		return unitMapper.toResponse(unit);
+	}
+
+	@Override
+	public UnitResponse create(CreateUnitRequest request) {
+		log.info("Creating new unit: {}", request.getName());
+		Unit unit = unitMapper.toEntity(request);
+		Unit saved = unitRepository.save(unit);
+		return unitMapper.toResponse(saved);
+	}
+
+	@Override
+	public UnitResponse update(UUID id, UpdateUnitRequest request) {
+		log.info("Updating unit with id: {}", id);
+		Unit unit = unitRepository.findById(id)
+			.orElseThrow(() -> new ResourceNotFoundException("Unit not found with id: " + id));
+		unitMapper.updateEntity(request, unit);
+		Unit updated = unitRepository.save(unit);
+		return unitMapper.toResponse(updated);
+	}
+
+	@Override
+	public void delete(UUID id) {
+		log.info("Deleting unit with id: {}", id);
+		if (!unitRepository.existsById(id)) {
+			throw new ResourceNotFoundException("Unit not found with id: " + id);
+		}
+		unitRepository.deleteById(id);
+	}
+}
