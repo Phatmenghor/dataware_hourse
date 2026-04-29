@@ -8,10 +8,10 @@ import cpb.dwh_bi_api.features.user.models.User;
 import cpb.dwh_bi_api.features.user.repository.UserRepository;
 import cpb.dwh_bi_api.features.user.service.UserService;
 import cpb.dwh_bi_api.shared.exception.ResourceNotFoundException;
-import cpb.dwh_bi_api.utils.JwtTokenUtil;
+import cpb.dwh_bi_api.shared.security.jwt.JWTGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,8 +27,8 @@ public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
 	private final UserMapper userMapper;
-	private final JwtTokenUtil jwtTokenUtil;
-	private final BCryptPasswordEncoder passwordEncoder;
+	private final JWTGenerator jwtGenerator;
+	private final PasswordEncoder passwordEncoder;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -98,9 +98,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public UserResponse getProfile(String token) {
-		log.info("Fetching user profile from token");
-		String username = jwtTokenUtil.getUsernameFromToken(token.replace("Bearer ", ""));
+	public UserResponse getProfile(String username) {
+		log.info("Fetching user profile for username: {}", username);
 		User user = userRepository.findByUsername(username)
 			.orElseThrow(() -> new ResourceNotFoundException("User not found with username: " + username));
 		return userMapper.toResponse(user);

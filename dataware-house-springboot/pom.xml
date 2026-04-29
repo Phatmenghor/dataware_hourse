@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.6</version>
+		<version>3.2.0</version>
 		<relativePath/>
 	</parent>
 
@@ -23,8 +23,8 @@
 
 		<java.version>17</java.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
-		<jwt.version>0.11.5</jwt.version>
-		<springdoc.version>1.6.14</springdoc.version>
+		<jwt.version>0.12.3</jwt.version>
+		<springdoc.version>2.0.2</springdoc.version>
 	</properties>
 
 	<dependencies>
@@ -53,12 +53,7 @@
 		<!-- Swagger/OpenAPI Documentation -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>${springdoc.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-security</artifactId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>${springdoc.version}</version>
 		</dependency>
 

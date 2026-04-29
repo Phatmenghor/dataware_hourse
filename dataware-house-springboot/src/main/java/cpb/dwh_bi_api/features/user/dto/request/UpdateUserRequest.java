@@ -1,5 +1,6 @@
 package cpb.dwh_bi_api.features.user.dto.request;
 
+import cpb.dwh_bi_api.shared.enums.Status;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +21,7 @@ public class UpdateUserRequest {
 	private String staffId;
 	private String username;
 	private String password;
-	private Boolean status;
+	private Status status;
 	private UUID departmentId;
 	private UUID positionId;
 	private UUID roleId;

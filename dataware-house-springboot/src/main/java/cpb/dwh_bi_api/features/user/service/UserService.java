@@ -15,5 +15,5 @@ public interface UserService {
 	UserResponse update(UUID id, UpdateUserRequest request);
 	void delete(UUID id);
 	UserResponse resetPassword(UUID id, String newPassword);
-	UserResponse getProfile(String token);
+	UserResponse getProfile(String username);
 }

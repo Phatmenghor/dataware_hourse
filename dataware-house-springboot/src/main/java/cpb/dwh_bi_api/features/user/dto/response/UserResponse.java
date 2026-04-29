@@ -1,5 +1,6 @@
 package cpb.dwh_bi_api.features.user.dto.response;
 
+import cpb.dwh_bi_api.shared.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +18,7 @@ public class UserResponse {
 	private String fullName;
 	private String staffId;
 	private String username;
-	private Boolean status;
+	private Status status;
 	private LocalDateTime passwordExpired;
 	private LocalDateTime passwordResetedAt;
 	private UUID departmentId;

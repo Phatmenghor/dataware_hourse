@@ -2,6 +2,7 @@ package cpb.dwh_bi_api.shared.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +55,7 @@ public class JWTGenerator {
                 .claim("type", "access")
                 .issuedAt(currentDate)
                 .expiration(expiryDate)
-                .signWith(getSigningKey(), Jwts.SIG.HS512)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS512)
                 .compact();
     }
 
@@ -77,7 +78,7 @@ public class JWTGenerator {
                 .claim("type", "access")
                 .issuedAt(currentDate)
                 .expiration(expiryDate)
-                .signWith(getSigningKey(), Jwts.SIG.HS512)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS512)
                 .compact();
     }
 
@@ -104,7 +105,7 @@ public class JWTGenerator {
             builder.claim("businessId", businessId);
         }
 
-        return builder.signWith(getSigningKey(), Jwts.SIG.HS512)
+        return builder.signWith(getSigningKey(), SignatureAlgorithm.HS512)
                 .compact();
     }
 
