@@ -39,8 +39,9 @@ logging:
     cpb.dwh_bi_api: INFO
 
 jwt:
-  secret: ${JWT_SECRET:cpbank@dwh@bi}
-  expiration: 86400000
+  secret: ${JWT_SECRET:cpbank@dwh@bi@secure@key@2024}
+  expiration: 900000
+  refresh-token-expiration: 604800000
 
 security:
   ignored: /swagger-ui/**,/v3/api-docs/**

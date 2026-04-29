@@ -5,6 +5,8 @@ import cpb.dwh_bi_api.features.position.models.Position;
 import cpb.dwh_bi_api.features.role.models.Role;
 import cpb.dwh_bi_api.features.widget.models.WidgetFavorite;
 import cpb.dwh_bi_api.shared.domain.BaseUUIDEntity;
+import cpb.dwh_bi_api.shared.enums.AccountStatus;
+import cpb.dwh_bi_api.shared.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,7 +48,12 @@ public class User extends BaseUUIDEntity {
 	private LocalDateTime passwordResetedAt;
 
 	@Column(nullable = false)
-	private Boolean status = false;
+	@Enumerated(EnumType.STRING)
+	private Status status = Status.ACTIVE;
+
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private AccountStatus accountStatus = AccountStatus.ACTIVE;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "department_id")
