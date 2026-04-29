@@ -1,18 +1,71 @@
 spring:
-  datasource:
-    url: ${DB_URL:jdbc:postgresql://prod-db:5432/dwh_cpb_bi}
-    username: ${DB_USER:postgres}
-    password: ${DB_PASSWORD:secure_password}
-    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 20
+          fetch_size: 50
+        order_inserts: true
+        order_updates: true
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://prod-db-server:5432/dwh_bi}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
 
-logging:
-  level:
-    root: WARN
-    cpb.dwh_bi_api: INFO
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /api
 
 springdoc:
   swagger-ui:
     enabled: false
+  api-docs:
+    enabled: false
+
+logging:
+  level:
+    root: WARN
+    cpb.dwh_bi_api: WARN
+  file:
+    name: /var/log/dwh_bi_api/application.log
+    max-size: 100MB
+    max-history: 30
+    total-size-cap: 10GB
+
+# Production Oracle connection for reporting
+datasource:
+  oracle:
+    url: ${DB_ORACLE_URL}
+    username: ${DB_ORACLE_USER}
+    password: ${DB_ORACLE_PASSWORD}
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      maximum-pool-size: 15
+      minimum-idle: 3
+
+# Excel Export Settings
+excel:
+  export:
+    enabled: true
+    temp-directory: /var/tmp/dwh_bi/excel
+    max-rows-per-sheet: 100000
+    enable-compression: true
+    include-audit-columns: false
+
+# Security Settings
+security:
+  jwt:
+    require-https: true
+    cookie-secure: true
+    cookie-http-only: true

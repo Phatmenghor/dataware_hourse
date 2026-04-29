@@ -1,0 +1,39 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dwh_bi_local
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: 8081
+
+springdoc:
+  swagger-ui:
+    enabled: true
+
+logging:
+  level:
+    root: INFO
+    cpb.dwh_bi_api: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# Local development Oracle connection (optional)
+datasource:
+  oracle:
+    url: jdbc:oracle:thin:@localhost:1521:ORCL
+    username: ${DB_ORACLE_USER:}
+    password: ${DB_ORACLE_PASSWORD:}
+    driver-class-name: oracle.jdbc.OracleDriver
+
+# Excel Export Settings
+excel:
+  export:
+    enabled: true
+    temp-directory: ./temp/excel
+    max-rows-per-sheet: 10000

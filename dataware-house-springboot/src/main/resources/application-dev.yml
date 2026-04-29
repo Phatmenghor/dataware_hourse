@@ -1,0 +1,39 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/dwh_bi_dev}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: ${SERVER_PORT:8081}
+
+springdoc:
+  swagger-ui:
+    enabled: true
+
+logging:
+  level:
+    root: WARN
+    cpb.dwh_bi_api: INFO
+    org.hibernate.SQL: WARN
+
+# Dev Oracle connection for reporting
+datasource:
+  oracle:
+    url: ${DB_ORACLE_URL:jdbc:oracle:thin:@oracle-dev-server:1521:DEVDB}
+    username: ${DB_ORACLE_USER:}
+    password: ${DB_ORACLE_PASSWORD:}
+    driver-class-name: oracle.jdbc.OracleDriver
+
+# Excel Export Settings
+excel:
+  export:
+    enabled: true
+    temp-directory: /var/tmp/dwh_bi/excel
+    max-rows-per-sheet: 50000
+    enable-compression: true
