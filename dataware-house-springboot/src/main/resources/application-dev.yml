@@ -4,13 +4,15 @@ spring:
       ddl-auto: update
     show-sql: false
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/dwh_bi_dev}
-    username: ${DB_USER:postgres}
-    password: ${DB_PASSWORD:password}
-    driver-class-name: org.postgresql.Driver
+    driver-class-name: ${DB_PRIMARY_DRIVER:org.postgresql.Driver}
+    url: ${DB_PRIMARY_URL:jdbc:postgresql://localhost:5432/dwh_bi_dev}
+    username: ${DB_PRIMARY_USER:postgres}
+    password: ${DB_PRIMARY_PASSWORD:password}
 
 server:
   port: ${SERVER_PORT:8081}
+  servlet:
+    context-path: ${SERVER_SERVLET_CONTEXT_PATH:/api}
 
 springdoc:
   swagger-ui:
@@ -18,22 +20,21 @@ springdoc:
 
 logging:
   level:
-    root: WARN
-    cpb.dwh_bi_api: INFO
+    root: ${LOGGING_LEVEL_ROOT:WARN}
+    cpb.dwh_bi_api: ${LOGGING_LEVEL_DWH:INFO}
     org.hibernate.SQL: WARN
 
 # Dev Oracle connection for reporting
 datasource:
   oracle:
+    driver-class-name: ${DB_ORACLE_DRIVER:oracle.jdbc.OracleDriver}
     url: ${DB_ORACLE_URL:jdbc:oracle:thin:@oracle-dev-server:1521:DEVDB}
     username: ${DB_ORACLE_USER:}
     password: ${DB_ORACLE_PASSWORD:}
-    driver-class-name: oracle.jdbc.OracleDriver
 
 # Excel Export Settings
 excel:
   export:
-    enabled: true
-    temp-directory: /var/tmp/dwh_bi/excel
-    max-rows-per-sheet: 50000
-    enable-compression: true
+    enabled: ${EXCEL_EXPORT_ENABLED:true}
+    temp-directory: ${EXCEL_EXPORT_TEMP_DIR:/var/tmp/dwh_bi/excel}
+    max-rows-per-sheet: ${EXCEL_EXPORT_MAX_ROWS:50000}
