@@ -19,7 +19,7 @@ import {
 } from "@prisma/client";
 import { CalendarInline } from "@/components/ui/calendar-inline";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { API_END_POINT, TOKEN_COOKIES } from "@/constant/api-end-point";
+import { API_END_POINT, TOKEN_COOKIES } from "@/constants/api-endpoints";
 import { getToken } from "@/lib/init-token";
 import axios from "axios";
 import React from "react";

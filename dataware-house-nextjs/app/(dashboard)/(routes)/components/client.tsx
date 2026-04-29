@@ -9,7 +9,7 @@ import EmptyCard from "@/components/cards/statistic-card/EmptyCard";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import axios from "axios";
-import { TOKEN_COOKIES } from "@/constant/api-end-point";
+import { TOKEN_COOKIES } from "@/constants/api-endpoints";
 import { getToken } from "@/lib/init-token";
 import {
   departments,

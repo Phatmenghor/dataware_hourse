@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 
-import { TOKEN_COOKIES } from "@/constant/api-end-point";
+import { TOKEN_COOKIES } from "@/constants/api-endpoints";
 import { getToken } from "@/lib/init-token";
 import axios from "axios";
 import { ScrollArea } from "@/components/ui/scroll-area";

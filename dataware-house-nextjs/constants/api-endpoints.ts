@@ -17,3 +17,6 @@ export const TOKEN_COOKIES = {
   TOKEN_NAME: "jwtToken",
   AUTH_ID: "authId",
 };
+
+// Backward compatibility - export old name
+export const API_ENDPOINTS = API_END_POINT;

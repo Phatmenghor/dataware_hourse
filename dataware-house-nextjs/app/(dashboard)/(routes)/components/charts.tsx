@@ -5,7 +5,7 @@ import { LineCharts } from "./line-charts";
 import { BarCharts } from "./bar-charts";
 import { PieCharts } from "./pie-charts";
 import toast from "react-hot-toast";
-import { API_END_POINT, TOKEN_COOKIES } from "@/constant/api-end-point";
+import { API_END_POINT, TOKEN_COOKIES } from "@/constants/api-endpoints";
 import axios from "axios";
 import { convertMonth } from "@/lib/convert-month";
 import { getToken } from "@/lib/init-token";

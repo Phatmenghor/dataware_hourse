@@ -20,7 +20,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { DropdownMenu } from "./dropdown-menu";
-import { API_END_POINT, TOKEN_COOKIES } from "@/constant/api-end-point";
+import { API_END_POINT, TOKEN_COOKIES } from "@/constants/api-endpoints";
 import React, { useEffect, useState } from "react";
 import { getToken, removeToken } from "@/lib/init-token";
 import axios, { AxiosError } from "axios";

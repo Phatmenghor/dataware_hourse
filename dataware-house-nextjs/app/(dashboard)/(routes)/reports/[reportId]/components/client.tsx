@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { TOKEN_COOKIES } from "@/constant/api-end-point";
+import { TOKEN_COOKIES } from "@/constants/api-endpoints";
 import { getToken } from "@/lib/init-token";
 import {
   metaDatas,

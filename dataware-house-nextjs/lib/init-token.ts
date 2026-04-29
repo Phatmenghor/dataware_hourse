@@ -1,4 +1,4 @@
-import { TOKEN_COOKIES } from "@/constant/api-end-point";
+import { TOKEN_COOKIES } from "@/constants/api-endpoints";
 import Cookies from "universal-cookie";
 import CryptoJS from "crypto-js";
 

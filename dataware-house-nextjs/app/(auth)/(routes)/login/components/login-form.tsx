@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { API_END_POINT, TOKEN_COOKIES } from "@/constant/api-end-point";
+import { API_END_POINT, TOKEN_COOKIES } from "@/constants/api-endpoints";
 import { setId, setToken } from "@/lib/init-token";
 
 const formSchema = z.object({
