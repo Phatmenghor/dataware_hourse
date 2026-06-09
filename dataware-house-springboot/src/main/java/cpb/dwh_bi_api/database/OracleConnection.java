@@ -22,6 +22,8 @@ public class OracleConnection {
     public ResultSet selectAll(String query) {
         ResultSet result = null;
         try {
+            // Remove trailing semicolon — JDBC throws ORA-00911 if present
+            query = query.trim().replaceAll(";\\s*$", "");
             Class.forName(ORACLE_CLASS);
             connection = DriverManager.getConnection(ORACLE_DB_URL, ORACLE_USER, ORACLE_PASS);
             PreparedStatement statement = connection.prepareStatement(query);

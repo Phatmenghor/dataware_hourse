@@ -41,8 +41,8 @@ public class ReportingService {
                 int numColumns = rsmd.getColumnCount();
                 Map<String, Object> row = new HashMap<>();
                 for (int i = 1; i <= numColumns; i++) {
-                    String columnName = rsmd.getColumnName(i);
-                    row.put(columnName, result.getObject(columnName));
+                    String columnName = rsmd.getColumnName(i).toUpperCase();
+                    row.put(columnName, result.getObject(i));
                 }
 
                 list.add(row);
@@ -56,6 +56,7 @@ public class ReportingService {
     }
 
     public int calculateTotalRecords(String query) throws Exception {
+        query = query.trim().replaceAll(";\\s*$", "");
         String countQuery = "SELECT COUNT(*) AS total FROM (" + query + ")";
         OracleConnection oracleConn = new OracleConnection();
 
@@ -107,11 +108,12 @@ public class ReportingService {
             // Add Header Row
             addHeaders(sheet, request.getColumns(), headerStyle);
 
+            String execQuery = request.getQuery().trim().replaceAll(";\\s*$", "");
             try (Connection connection = oracleConnection.getConnection();
                  Statement statement = connection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY)) {
 
                 statement.setFetchSize(1600);  // Fetch in batches of 1000 rows
-                ResultSet resultSet = statement.executeQuery(request.getQuery());
+                ResultSet resultSet = statement.executeQuery(execQuery);
 
                 int rowCount = 7;  // Starting row index after header
                 int sheetNumber = 1;  // Row number for data
@@ -138,11 +140,11 @@ public class ReportingService {
                         rowCount = 7;  // Reset row count after creating a new sheet
                     }
 
-                    // Map data from result set and add it to the sheet
+                    // Map data from result set — store keys in UPPERCASE to match Oracle column names
                     Map<String, Object> row = new HashMap<>();
                     int columnCount = resultSet.getMetaData().getColumnCount();
                     for (int i = 1; i <= columnCount; i++) {
-                        row.put(resultSet.getMetaData().getColumnLabel(i), resultSet.getObject(i));
+                        row.put(resultSet.getMetaData().getColumnLabel(i).toUpperCase(), resultSet.getObject(i));
                     }
 
                     addDataRows(sheet, row, request.getColumns(), dataStyle, rowCount++, index++);
@@ -301,10 +303,10 @@ public class ReportingService {
         indexCellObj.setCellValue(index++); // Use rowIndex as a row number
         indexCellObj.setCellStyle(dataStyle);
 
-        // Add the actual data cells
+        // Add the actual data cells — use uppercase key to match Oracle column names
         for (int i = 0; i < columns.size(); i++) {
             String key = columns.get(i).get("key");
-            Object value = rowData.get(key);
+            Object value = rowData.get(key != null ? key.toUpperCase() : key);
             Cell cell = row.createCell(i + 1);
             if (value != null) {
                 cell.setCellValue(value.toString());
