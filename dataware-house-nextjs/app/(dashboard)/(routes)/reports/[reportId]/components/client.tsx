@@ -408,34 +408,15 @@ export const ReportClient: React.FC<ReportClientProps> = ({
 
     var str = report?.code;
 
-    var query;
-    if (paramCol.length === 2) {
-      query = str
-        ?.replaceAll(
-          "param_from_date",
-          `'${moment(fromDate).format("DD-MMM-YYYY")}'`
-        )
-        .replaceAll(
-          "param_to_date",
-          `'${moment(toDate).format("DD-MMM-YYYY")}'`
-        )
-        .replace("param_branch", `${branch}`)
-        .replace("param_ccy", `${ccy}`)
-        .replaceAll("param_national", `${national}`)
-        .replace("param_trx_type  ", `'${trxType}'`)
-        .replace("param_acct_no", `${acctNo}`);
-    } else {
-      query = str
-        ?.replaceAll(
-          "param_report_date",
-          `'${moment(reportDate).format("DD-MMM-YYYY")}'`
-        )
-        .replace("param_branch", `${branch}`)
-        .replace("param_ccy", `${ccy}`)
-        .replaceAll("param_national", `${national}`)
-        .replace("param_trx_type  ", `'${trxType}'`)
-        .replace("param_acct_no", `${acctNo}`);
-    }
+    var query = str
+      ?.replaceAll("param_from_date",   `'${moment(fromDate).format("DD-MMM-YYYY")}'`)
+      .replaceAll("param_to_date",      `'${moment(toDate).format("DD-MMM-YYYY")}'`)
+      .replaceAll("param_report_date",  `'${moment(reportDate).format("DD-MMM-YYYY")}'`)
+      .replace("param_branch",          `${branch}`)
+      .replace("param_ccy",             `${ccy}`)
+      .replaceAll("param_national",     `${national}`)
+      .replace("param_trx_type  ",      `'${trxType}'`)
+      .replace("param_acct_no",         `${acctNo}`);
 
     setTotalRecord(0);
     setQuery(`${query}`);
