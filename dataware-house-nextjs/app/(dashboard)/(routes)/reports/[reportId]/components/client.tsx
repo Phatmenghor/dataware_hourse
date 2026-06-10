@@ -409,7 +409,7 @@ export const ReportClient: React.FC<ReportClientProps> = ({
     var str = report?.code;
 
     var query;
-    if (paramSize === 2) {
+    if (paramCol.length === 2) {
       query = str
         ?.replaceAll(
           "param_from_date",
